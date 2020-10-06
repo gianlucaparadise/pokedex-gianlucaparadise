@@ -1,10 +1,9 @@
 # GianlucaParadise's Pokedex
 
-## Overview
+## Overview
 
 Develop an app that displays a list of Pokémon.
-When the user selects a Pokémon, the app shows the details with the name of the
-Pokémon, image/s, stats and type (fire, poison, etc.).
+When the user selects a Pokémon, the app shows the details with the name of the Pokémon, image/s, stats and type (fire, poison, etc.).
 The APIs are available at the following address: https://pokeapi.co
 
 ## Guidelines
@@ -20,7 +19,7 @@ The APIs are available at the following address: https://pokeapi.co
 9. Create paging with Jetpack's Paging library
 10. Submit the code by publishing it to a public repository
 
-## Bonus tasks
+## Bonus tasks
 
 1. Make the app usable even offline
 2. Write Unit Tests
