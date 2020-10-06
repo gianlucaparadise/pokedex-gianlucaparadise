@@ -2,6 +2,7 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: "androidx.navigation.safeargs.kotlin"
+apply plugin: 'kotlin-kapt'
 
 android {
     compileSdkVersion 30
@@ -39,8 +40,11 @@ dependencies {
     implementation "androidx.navigation:navigation-fragment-ktx:$versions.nav"
     implementation "androidx.navigation:navigation-ui-ktx:$versions.nav"
 
+    // Koin
+    implementation "org.koin:koin-android-viewmodel:$versions.koin"
+
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
-
+    testImplementation "org.koin:koin-test:$versions.koin"
 }

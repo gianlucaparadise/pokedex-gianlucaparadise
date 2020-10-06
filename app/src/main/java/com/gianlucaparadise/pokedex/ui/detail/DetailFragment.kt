@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.gianlucaparadise.pokedex.R
+import org.koin.android.viewmodel.ext.android.viewModel
 
 class DetailFragment : Fragment() {
 
@@ -14,7 +15,7 @@ class DetailFragment : Fragment() {
         fun newInstance() = DetailFragment()
     }
 
-    private lateinit var viewModel: DetailViewModel
+    private val viewModel: DetailViewModel by viewModel()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -25,8 +26,6 @@ class DetailFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProviders.of(this).get(DetailViewModel::class.java)
-        // TODO: Use the ViewModel
     }
 
 }
