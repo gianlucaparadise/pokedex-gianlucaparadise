@@ -2,6 +2,7 @@ package com.gianlucaparadise.pokedex
 
 import android.app.Application
 import com.gianlucaparadise.pokedex.di.appModule
+import com.gianlucaparadise.pokedex.di.networkModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
 import org.koin.core.context.startKoin
@@ -14,7 +15,7 @@ class MainApplication : Application() {
         startKoin {
             androidLogger()
             androidContext(this@MainApplication)
-            modules(appModule)
+            modules(appModule, networkModule)
         }
     }
 }
