@@ -9,7 +9,7 @@ import com.gianlucaparadise.pokedex.repository.PokedexRepository
 import com.gianlucaparadise.pokedex.vo.PokemonListItem
 import kotlinx.coroutines.launch
 
-class MainViewModel(private val repository: PokedexRepository) : ViewModel() {
+class MainViewModel(repository: PokedexRepository) : ViewModel() {
 
     private val pokemonListResult = repository.getPokemonList(viewModelScope)
 

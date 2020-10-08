@@ -7,6 +7,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.FragmentNavigatorExtras
+import androidx.navigation.fragment.findNavController
 import com.gianlucaparadise.pokedex.R
 import com.gianlucaparadise.pokedex.adapters.PokemonClickHandler
 import com.gianlucaparadise.pokedex.adapters.PokemonListAdapter
@@ -59,8 +61,17 @@ class MainFragment : Fragment() {
         })
     }
 
-    private val onPokemonClicked: PokemonClickHandler = { _, _ ->
+    private val onPokemonClicked: PokemonClickHandler = { pokemonListItem, holder ->
+        val name = holder.itemView.findViewById<View>(R.id.pokemon_name).apply {
+            transitionName = "pokemonName"
+        }
 
+        val extras = FragmentNavigatorExtras(
+            name to name.transitionName
+        )
+
+        val action = MainFragmentDirections.actionMainFragmentToDetailFragment(pokemonListItem)
+        findNavController().navigate(action, extras)
     }
 
 }
