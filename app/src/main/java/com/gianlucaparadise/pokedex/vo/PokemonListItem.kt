@@ -1,6 +1,11 @@
 package com.gianlucaparadise.pokedex.vo
 
+import androidx.room.ColumnInfo
+import androidx.room.Entity
+import androidx.room.PrimaryKey
+
+@Entity
 data class PokemonListItem(
-    val name: String,
-    val url: String
+    @PrimaryKey val name: String,
+    @ColumnInfo(name = "url") val url: String
 )

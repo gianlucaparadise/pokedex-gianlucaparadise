@@ -5,7 +5,8 @@ buildscript {
             nav     : "2.3.0",
             koin    : "2.1.6",
             retrofit: "2.9.0",
-            paging  : "2.1.2"
+            paging  : "2.1.2",
+            room    : "2.2.5"
     ]
     repositories {
         google()
