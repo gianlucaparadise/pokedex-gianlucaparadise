@@ -11,7 +11,9 @@ import com.gianlucaparadise.pokedex.R
 import com.gianlucaparadise.pokedex.adapters.PokemonClickHandler
 import com.gianlucaparadise.pokedex.adapters.PokemonListAdapter
 import com.gianlucaparadise.pokedex.databinding.MainFragmentBinding
+import com.gianlucaparadise.pokedex.repository.Status
 import com.gianlucaparadise.pokedex.vo.PokemonListItem
+import com.google.android.material.snackbar.Snackbar
 import org.koin.android.viewmodel.ext.android.viewModel
 
 class MainFragment : Fragment() {
@@ -41,11 +43,20 @@ class MainFragment : Fragment() {
         viewModel.pokemonList.observe(viewLifecycleOwner, Observer { result ->
             val adapter = binding.pokemonList.adapter
             if (adapter is PokemonListAdapter) {
-                // adapter.submitList(result)
+                adapter.submitList(result)
             }
         })
 
-        viewModel.loadPokemonList()
+        viewModel.networkState.observe(viewLifecycleOwner, Observer { state ->
+            if (state.status == Status.FAILED) {
+                Snackbar
+                    .make(requireView(), R.string.network_error, Snackbar.LENGTH_INDEFINITE)
+                    .setAction(R.string.ok) {
+                        // no-op
+                    }
+                    .show()
+            }
+        })
     }
 
     private val onPokemonClicked: PokemonClickHandler = { _, _ ->

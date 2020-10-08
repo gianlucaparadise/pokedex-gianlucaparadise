@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Pokedex</string>
+    <string name="network_error">An error occurred while retrieving the list of Pokémon</string>
+    <string name="ok">OK</string>
 </resources>

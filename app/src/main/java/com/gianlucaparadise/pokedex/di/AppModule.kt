@@ -14,7 +14,7 @@ import org.koin.dsl.module
 val appModule = module {
 
     single { provideDatabase(androidContext()) }
-    single<PokedexRepository> { PokedexRepositoryImpl(get()) }
+    single<PokedexRepository> { PokedexRepositoryImpl(get(), get()) }
 
     viewModel { MainViewModel(get()) }
     viewModel { DetailViewModel() }
