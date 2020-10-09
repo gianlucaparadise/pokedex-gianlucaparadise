@@ -5,11 +5,13 @@ import androidx.paging.PagedList
 import com.gianlucaparadise.pokedex.database.AppDatabase
 import com.gianlucaparadise.pokedex.network.PokeApiService
 import com.gianlucaparadise.pokedex.paging.PokemonListBoundaryCallback
+import com.gianlucaparadise.pokedex.vo.Pokemon
 import com.gianlucaparadise.pokedex.vo.PokemonListItem
 import kotlinx.coroutines.CoroutineScope
 
 interface PokedexRepository {
     fun getPokemonList(scope: CoroutineScope): Listing<PokemonListItem>
+    suspend fun getPokemon(name: String): Pokemon
 }
 
 class PokedexRepositoryImpl(
@@ -38,5 +40,9 @@ class PokedexRepositoryImpl(
             pagedList = pagedList,
             networkState = boundaryCallback.networkState
         )
+    }
+
+    override suspend fun getPokemon(name: String): Pokemon {
+        return backend.getPokemon(name)
     }
 }

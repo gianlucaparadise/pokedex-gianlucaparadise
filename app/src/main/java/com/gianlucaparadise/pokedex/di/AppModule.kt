@@ -18,7 +18,7 @@ val appModule = module {
     single<PokedexRepository> { PokedexRepositoryImpl(get(), get()) }
 
     viewModel { MainViewModel(get()) }
-    viewModel { (pokemonListItem: PokemonListItem) -> DetailViewModel(pokemonListItem) }
+    viewModel { (pokemonListItem: PokemonListItem) -> DetailViewModel(pokemonListItem, get()) }
 }
 
 fun provideDatabase(context: Context): AppDatabase {
