@@ -12,4 +12,6 @@ data class Pokemon(
     val sprites: Sprites?,
     val stats: List<Stats>?,
     val types: List<Type>?
-)
+) {
+    val statsDescriptor = createStatsDescriptorFromRawStats(stats)
+}
