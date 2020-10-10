@@ -3,4 +3,12 @@
     <string name="network_error">An error occurred while retrieving the list of Pokémon</string>
     <string name="ok">OK</string>
     <string name="type_label">Type:</string>
+    <string name="hp">HP: %s</string>
+    <string name="attack">Attack: %s</string>
+    <string name="defense">Defense: %s</string>
+    <string name="special_attack">Special-Attack: %s</string>
+    <string name="special_defense">Special-Defense: %s</string>
+    <string name="speed">Speed: %s</string>
+    <string name="accuracy">Accuracy: %s</string>
+    <string name="evasion">Evasion: %s</string>
 </resources>

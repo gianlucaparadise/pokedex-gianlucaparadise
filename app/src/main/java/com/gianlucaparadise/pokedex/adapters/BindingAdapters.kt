@@ -1,5 +1,6 @@
 package com.gianlucaparadise.pokedex.adapters
 
+import android.view.View
 import android.widget.ImageView
 import androidx.core.view.isVisible
 import androidx.databinding.BindingAdapter
@@ -19,4 +20,9 @@ fun bindImageFromUrl(view: ImageView, imageUrl: String?) {
         .circleCrop()
         .transition(DrawableTransitionOptions.withCrossFade())
         .into(view)
+}
+
+@BindingAdapter("isVisible")
+fun bindIsVisible(view: View, isVisible: Boolean) {
+    view.isVisible = isVisible
 }

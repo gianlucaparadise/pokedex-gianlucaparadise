@@ -1,6 +1,5 @@
 package com.gianlucaparadise.pokedex.ui.main
 
-import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -14,7 +13,6 @@ import com.gianlucaparadise.pokedex.adapters.PokemonClickHandler
 import com.gianlucaparadise.pokedex.adapters.PokemonListAdapter
 import com.gianlucaparadise.pokedex.databinding.MainFragmentBinding
 import com.gianlucaparadise.pokedex.repository.Status
-import com.gianlucaparadise.pokedex.vo.PokemonListItem
 import com.google.android.material.snackbar.Snackbar
 import org.koin.android.viewmodel.ext.android.viewModel
 
