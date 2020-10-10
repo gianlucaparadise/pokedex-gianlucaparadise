@@ -5,6 +5,7 @@
     <color name="colorAccent">#FFDE00</color>
 
     <!-- Pokemon types-->
+    <color name="type_text_color">#FFFFFF</color>
     <color name="type_normal">#A8A878</color>
     <color name="type_fighting">#C03028</color>
     <color name="type_flying">#A890F0</color>
@@ -25,4 +26,5 @@
     <color name="type_fairy">#EE99AC</color>
     <color name="type_unknown">#68A090</color>
     <color name="type_shadow">#000000</color>
+    <color name="type_other">#0000FF</color>
 </resources>
