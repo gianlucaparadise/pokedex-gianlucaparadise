@@ -10,9 +10,6 @@ import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 @BindingAdapter("imageFromUrl")
 fun bindImageFromUrl(view: ImageView, imageUrl: String?) {
     val hasImageUrl = imageUrl?.isNotBlank() == true
-
-    view.isVisible = hasImageUrl
-
     if (!hasImageUrl) return
 
     Glide.with(view.context)

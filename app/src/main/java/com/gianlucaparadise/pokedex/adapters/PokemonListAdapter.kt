@@ -40,7 +40,7 @@ class PokemonListAdapter(private val onPokemonClicked: PokemonClickHandler?) :
     ) : RecyclerView.ViewHolder(binding.root) {
         fun bind(pokemon: PokemonListItem, listener: View.OnClickListener) {
             with(binding) {
-                name = pokemon.name
+                name = pokemon.name.capitalize()
                 clickListener = listener
             }
         }

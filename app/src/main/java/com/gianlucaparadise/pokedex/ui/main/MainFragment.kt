@@ -40,6 +40,8 @@ class MainFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
+        activity?.title = getString(R.string.app_name)
+
         viewModel.pokemonList.observe(viewLifecycleOwner, Observer { result ->
             val adapter = binding.pokemonList.adapter
             if (adapter is PokemonListAdapter) {

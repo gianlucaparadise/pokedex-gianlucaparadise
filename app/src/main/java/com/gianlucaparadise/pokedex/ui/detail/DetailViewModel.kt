@@ -10,7 +10,9 @@ import com.gianlucaparadise.pokedex.vo.PokemonListItem
 import com.gianlucaparadise.pokedex.vo.StatsDescriptor
 import com.gianlucaparadise.pokedex.vo.Type
 import com.gianlucaparadise.pokedex.vo.createStatsDescriptorFromRawStats
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import java.lang.Exception
 
 class DetailViewModel(
@@ -18,7 +20,7 @@ class DetailViewModel(
     private val repository: PokedexRepository
 ) : ViewModel() {
 
-    val name = pokemonListItem.name
+    val name = pokemonListItem.name.capitalize()
 
     private val _types = MutableLiveData<List<Type>?>()
     val types: LiveData<List<Type>?> = _types
@@ -32,10 +34,14 @@ class DetailViewModel(
     init {
         viewModelScope.launch {
             try {
-                val pokemon = repository.getPokemon(name)
+                val pokemon = withContext(Dispatchers.IO) {
+                    repository.getPokemon(pokemonListItem.name)
+                }
                 _types.value = pokemon.types
                 _imageUrl.value = pokemon.sprites?.front_default
-                _stats.value = createStatsDescriptorFromRawStats(pokemon.stats)
+                _stats.value = withContext(Dispatchers.IO) {
+                    createStatsDescriptorFromRawStats(pokemon.stats)
+                }
 
             } catch (ex: Exception) {
                 Log.e("DetailViewModel", "Exception while retrieving pokemon details", ex)

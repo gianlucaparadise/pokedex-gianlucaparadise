@@ -45,6 +45,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:text="@string/type_label"
+            app:isVisible="@{viewmodel.types != null}"
             app:layout_constraintBottom_toBottomOf="@+id/img_pokemon"
             app:layout_constraintStart_toStartOf="@+id/txt_pokemon_name"
             app:layout_constraintTop_toBottomOf="@+id/txt_pokemon_name" />
