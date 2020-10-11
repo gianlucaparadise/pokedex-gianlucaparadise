@@ -3,7 +3,7 @@ package com.gianlucaparadise.pokedex.ui.detail
 import android.util.Log
 import com.gianlucaparadise.pokedex.repository.PokedexRepository
 import com.gianlucaparadise.pokedex.vo.PokemonListItem
-import io.uniflow.android.flow.AndroidDataFlow
+import io.uniflow.androidx.flow.AndroidDataFlow
 import io.uniflow.core.flow.data.UIState
 
 class DetailViewModel(

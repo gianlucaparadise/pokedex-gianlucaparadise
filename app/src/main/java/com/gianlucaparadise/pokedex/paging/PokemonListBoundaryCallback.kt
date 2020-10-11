@@ -6,6 +6,7 @@ import com.gianlucaparadise.pokedex.database.AppDatabase
 import com.gianlucaparadise.pokedex.network.PokeApiService
 import com.gianlucaparadise.pokedex.vo.PokemonListItem
 import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.asCoroutineDispatcher
 import kotlinx.coroutines.launch
 import java.lang.Exception
@@ -29,6 +30,7 @@ class PokemonListBoundaryCallback(
 
     private val executor = Executors.newSingleThreadExecutor()
     private val helper = PagingRequestHelper(executor)
+    @ExperimentalCoroutinesApi
     val networkState = helper.createStatusAsFlow()
 
     override fun onZeroItemsLoaded() {

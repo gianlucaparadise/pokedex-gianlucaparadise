@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.databinding.BindingAdapter
 import com.gianlucaparadise.pokedex.R
+import com.gianlucaparadise.pokedex.vo.NameUrlPair
 import com.gianlucaparadise.pokedex.vo.Type
 import com.google.android.material.chip.Chip
 import com.google.android.material.chip.ChipGroup
@@ -16,10 +17,6 @@ class TypesListView @JvmOverloads constructor(
     defStyle: Int = 0
 ) : ChipGroup(context, attrs, defStyle) {
 
-    init {
-        isSingleLine = true
-    }
-
     private var _types: List<Type>? = null
     var types: List<Type>?
         get() = _types
@@ -28,6 +25,19 @@ class TypesListView @JvmOverloads constructor(
             _types = value
             updateTypeChips(value)
         }
+
+    init {
+        isSingleLine = true
+
+        //region Code for Android Studio Layout Editor
+        if (isInEditMode) {
+            this.types = listOf(
+                Type(0, NameUrlPair("grass", "")),
+                Type(1, NameUrlPair("poison", ""))
+            )
+        }
+        //endregion
+    }
 
     private fun updateTypeChips(types: List<Type>?) {
         this.removeAllViews()

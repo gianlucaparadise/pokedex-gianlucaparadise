@@ -11,8 +11,8 @@ import androidx.navigation.fragment.navArgs
 import com.gianlucaparadise.pokedex.R
 import com.gianlucaparadise.pokedex.databinding.DetailFragmentBinding
 import com.google.android.material.snackbar.Snackbar
-import io.uniflow.android.flow.onEvents
-import io.uniflow.android.flow.onStates
+import io.uniflow.androidx.flow.onEvents
+import io.uniflow.androidx.flow.onStates
 import io.uniflow.core.flow.data.UIState
 import kotlinx.android.synthetic.main.detail_fragment.*
 import org.koin.android.viewmodel.ext.android.viewModel
