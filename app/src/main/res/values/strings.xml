@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">Pokedex</string>
-    <string name="network_error">An error occurred while retrieving the list of Pokémon</string>
+    <string name="pokemon_list_network_error">An error occurred while retrieving the list of Pokémon</string>
+    <string name="pokemon_detail_network_error">An error occurred while retrieving the Pokémon detail</string>
     <string name="ok">OK</string>
     <string name="type_label">Type:</string>
     <string name="hp">HP: %s</string>

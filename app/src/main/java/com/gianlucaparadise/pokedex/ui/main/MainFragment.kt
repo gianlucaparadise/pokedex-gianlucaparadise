@@ -52,7 +52,7 @@ class MainFragment : Fragment() {
         viewModel.networkState.observe(viewLifecycleOwner, Observer { state ->
             if (state.status == Status.FAILED) {
                 Snackbar
-                    .make(requireView(), R.string.network_error, Snackbar.LENGTH_INDEFINITE)
+                    .make(requireView(), R.string.pokemon_list_network_error, Snackbar.LENGTH_INDEFINITE)
                     .setAction(R.string.ok) {
                         // no-op
                     }
