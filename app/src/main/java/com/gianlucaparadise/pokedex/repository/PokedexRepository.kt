@@ -43,6 +43,13 @@ class PokedexRepositoryImpl(
     }
 
     override suspend fun getPokemon(name: String): Pokemon {
-        return backend.getPokemon(name)
+
+        val dbPokemon = database.pokemonDetailDao().getByName(name)
+        if (dbPokemon != null) return dbPokemon
+
+        val webPokemon = backend.getPokemon(name)
+        database.pokemonDetailDao().insert(webPokemon)
+
+        return webPokemon
     }
 }

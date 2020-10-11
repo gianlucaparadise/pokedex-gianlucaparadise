@@ -11,7 +11,7 @@ import java.io.Serializable
 @JsonClass(generateAdapter = true)
 data class PokemonListItem(
     @PrimaryKey val name: String,
-    @ColumnInfo(name = "url") val url: String
+    val url: String
 ) : Serializable {
     @Ignore
     val id: Int = url.trim('/').split('/').last().toInt()

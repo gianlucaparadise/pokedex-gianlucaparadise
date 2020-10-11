@@ -2,7 +2,7 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "3efe244334d4404ba70bf9410e5ba36e",
+    "identityHash": "48a864eaeb3ab1a095485c25f5d3c863",
     "entities": [
       {
         "tableName": "PokemonListItem",
@@ -29,12 +29,134 @@
         },
         "indices": [],
         "foreignKeys": []
+      },
+      {
+        "tableName": "Pokemon",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER NOT NULL, `name` TEXT NOT NULL, `base_experience` INTEGER, `height` INTEGER, `is_default` INTEGER, `order` INTEGER, `weight` INTEGER, `location_area_encounters` TEXT, `stats` TEXT, `types` TEXT, `spritesback_female` TEXT, `spritesback_shiny_female` TEXT, `spritesback_default` TEXT, `spritesfront_female` TEXT, `spritesfront_shiny_female` TEXT, `spritesback_shiny` TEXT, `spritesfront_default` TEXT, `spritesfront_shiny` TEXT, PRIMARY KEY(`id`))",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "name",
+            "columnName": "name",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "base_experience",
+            "columnName": "base_experience",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "height",
+            "columnName": "height",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "is_default",
+            "columnName": "is_default",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "order",
+            "columnName": "order",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "weight",
+            "columnName": "weight",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "location_area_encounters",
+            "columnName": "location_area_encounters",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "stats",
+            "columnName": "stats",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "types",
+            "columnName": "types",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "sprites.back_female",
+            "columnName": "spritesback_female",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "sprites.back_shiny_female",
+            "columnName": "spritesback_shiny_female",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "sprites.back_default",
+            "columnName": "spritesback_default",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "sprites.front_female",
+            "columnName": "spritesfront_female",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "sprites.front_shiny_female",
+            "columnName": "spritesfront_shiny_female",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "sprites.back_shiny",
+            "columnName": "spritesback_shiny",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "sprites.front_default",
+            "columnName": "spritesfront_default",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "sprites.front_shiny",
+            "columnName": "spritesfront_shiny",
+            "affinity": "TEXT",
+            "notNull": false
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "id"
+          ],
+          "autoGenerate": false
+        },
+        "indices": [],
+        "foreignKeys": []
       }
     ],
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '3efe244334d4404ba70bf9410e5ba36e')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '48a864eaeb3ab1a095485c25f5d3c863')"
     ]
   }
 }
