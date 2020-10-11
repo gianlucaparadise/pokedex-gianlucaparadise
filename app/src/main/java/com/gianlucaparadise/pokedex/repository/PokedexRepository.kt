@@ -29,6 +29,7 @@ class PokedexRepositoryImpl(
 
         val dataSourceFactory = database.pokemonListItemDao().getAll()
 
+        // TODO: This LiveData should be replaced with Flow, but it is only possible with Paging3, which is in alpha
         val livePagedListBuilder = LivePagedListBuilder(dataSourceFactory, pagingConfig)
 
         val boundaryCallback = PokemonListBoundaryCallback(scope, database, backend, pagingConfig)

@@ -10,7 +10,6 @@ import kotlinx.coroutines.asCoroutineDispatcher
 import kotlinx.coroutines.launch
 import java.lang.Exception
 import java.util.concurrent.Executors
-import kotlin.math.log
 
 class PokemonListBoundaryCallback(
     private val scope: CoroutineScope,
@@ -30,7 +29,7 @@ class PokemonListBoundaryCallback(
 
     private val executor = Executors.newSingleThreadExecutor()
     private val helper = PagingRequestHelper(executor)
-    val networkState = helper.createStatusLiveData()
+    val networkState = helper.createStatusAsFlow()
 
     override fun onZeroItemsLoaded() {
         super.onZeroItemsLoaded()

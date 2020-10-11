@@ -1,8 +1,9 @@
 package com.gianlucaparadise.pokedex.paging
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import com.gianlucaparadise.pokedex.repository.NetworkState
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.MutableStateFlow
 
 private fun getErrorMessage(report: PagingRequestHelper.StatusReport): String {
     return PagingRequestHelper.RequestType.values().mapNotNull {
@@ -10,16 +11,16 @@ private fun getErrorMessage(report: PagingRequestHelper.StatusReport): String {
     }.first()
 }
 
-fun PagingRequestHelper.createStatusLiveData(): LiveData<NetworkState> {
-    val liveData = MutableLiveData<NetworkState>()
+@ExperimentalCoroutinesApi
+fun PagingRequestHelper.createStatusAsFlow(): Flow<NetworkState> {
+    val flow = MutableStateFlow<NetworkState>(NetworkState.IDLE)
     addListener { report ->
         when {
-            report.hasRunning() -> liveData.postValue(NetworkState.LOADING)
-            report.hasError() -> liveData.postValue(
-                NetworkState.error(getErrorMessage(report))
+            report.hasRunning() -> flow.value = NetworkState.LOADING
+            report.hasError() -> flow.value = NetworkState.error(getErrorMessage(report)
             )
-            else -> liveData.postValue(NetworkState.LOADED)
+            else -> flow.value = NetworkState.LOADED
         }
     }
-    return liveData
+    return flow
 }
