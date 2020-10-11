@@ -8,6 +8,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.navArgs
 import com.gianlucaparadise.pokedex.databinding.DetailFragmentBinding
+import io.uniflow.android.flow.onEvents
+import io.uniflow.android.flow.onStates
+import io.uniflow.core.flow.data.UIState
 import org.koin.android.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
 
@@ -38,11 +41,20 @@ class DetailFragment : Fragment() {
         return binding.root
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
-        activity?.title = viewModel.name
-        binding.viewmodel = viewModel
+        onStates(viewModel) { state ->
+            when (state) {
+                is DetailState -> updateState(state)
+            }
+        }
+
+        viewModel.getPokemonDetail()
     }
 
+    private fun updateState(state: DetailState) {
+        activity?.title = state.name
+        binding.state = state
+    }
 }

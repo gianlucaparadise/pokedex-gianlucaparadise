@@ -6,8 +6,8 @@
     <data>
 
         <variable
-            name="viewmodel"
-            type="com.gianlucaparadise.pokedex.ui.detail.DetailViewModel" />
+            name="state"
+            type="com.gianlucaparadise.pokedex.ui.detail.DetailState" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -21,7 +21,7 @@
             android:layout_height="100dp"
             android:layout_marginStart="20dp"
             android:layout_marginTop="20dp"
-            app:imageFromUrl="@{viewmodel.imageUrl}"
+            app:imageFromUrl="@{state.imageUrl}"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:src="@mipmap/ic_launcher" />
@@ -31,7 +31,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
-            android:text="@{viewmodel.name}"
+            android:text="@{state.name}"
             android:transitionName="pokemonName"
             app:layout_constraintBottom_toTopOf="@+id/txt_label_type"
             app:layout_constraintStart_toEndOf="@+id/img_pokemon"
@@ -45,7 +45,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:text="@string/type_label"
-            app:isVisible="@{viewmodel.types != null}"
+            app:isVisible="@{state.types != null}"
             app:layout_constraintBottom_toBottomOf="@+id/img_pokemon"
             app:layout_constraintStart_toStartOf="@+id/txt_pokemon_name"
             app:layout_constraintTop_toBottomOf="@+id/txt_pokemon_name" />
@@ -58,7 +58,7 @@
             app:layout_constraintBottom_toBottomOf="@+id/txt_label_type"
             app:layout_constraintStart_toEndOf="@+id/txt_label_type"
             app:layout_constraintTop_toTopOf="@+id/txt_label_type"
-            app:types="@{viewmodel.types}" />
+            app:types="@{state.types}" />
 
         <androidx.constraintlayout.widget.Barrier
             android:id="@+id/barrier_header"
@@ -75,8 +75,8 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
             android:layout_marginTop="20dp"
-            android:text="@{@string/hp(viewmodel.stats.hp.effort)}"
-            app:isVisible="@{viewmodel.stats.hp != null}"
+            android:text="@{@string/hp(state.stats.hp.effort)}"
+            app:isVisible="@{state.stats.hp != null}"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/barrier_header"
             tools:text="HP: 5" />
@@ -87,8 +87,8 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
             android:layout_marginTop="10dp"
-            android:text="@{@string/attack(viewmodel.stats.attack.effort)}"
-            app:isVisible="@{viewmodel.stats.attack != null}"
+            android:text="@{@string/attack(state.stats.attack.effort)}"
+            app:isVisible="@{state.stats.attack != null}"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/txt_label_hp"
             tools:text="Attack: 5" />
@@ -99,8 +99,8 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
             android:layout_marginTop="10dp"
-            android:text="@{@string/defense(viewmodel.stats.defense.effort)}"
-            app:isVisible="@{viewmodel.stats.defense != null}"
+            android:text="@{@string/defense(state.stats.defense.effort)}"
+            app:isVisible="@{state.stats.defense != null}"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/txt_label_attack"
             tools:text="Defense: 5" />
@@ -111,8 +111,8 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
             android:layout_marginTop="10dp"
-            android:text="@{@string/special_attack(viewmodel.stats.specialAttack.effort)}"
-            app:isVisible="@{viewmodel.stats.specialAttack != null}"
+            android:text="@{@string/special_attack(state.stats.specialAttack.effort)}"
+            app:isVisible="@{state.stats.specialAttack != null}"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/txt_label_defense"
             tools:text="Special-Attack: 5" />
@@ -123,8 +123,8 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
             android:layout_marginTop="10dp"
-            android:text="@{@string/special_defense(viewmodel.stats.specialDefense.effort)}"
-            app:isVisible="@{viewmodel.stats.specialDefense != null}"
+            android:text="@{@string/special_defense(state.stats.specialDefense.effort)}"
+            app:isVisible="@{state.stats.specialDefense != null}"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/txt_label_special_attack"
             tools:text="Special-Defense: 5" />
@@ -135,8 +135,8 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
             android:layout_marginTop="10dp"
-            android:text="@{@string/speed(viewmodel.stats.speed.effort)}"
-            app:isVisible="@{viewmodel.stats.speed != null}"
+            android:text="@{@string/speed(state.stats.speed.effort)}"
+            app:isVisible="@{state.stats.speed != null}"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/txt_label_special_defense"
             tools:text="Speed: 5" />
@@ -147,8 +147,8 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
             android:layout_marginTop="10dp"
-            android:text="@{@string/accuracy(viewmodel.stats.accuracy.effort)}"
-            app:isVisible="@{viewmodel.stats.accuracy != null}"
+            android:text="@{@string/accuracy(state.stats.accuracy.effort)}"
+            app:isVisible="@{state.stats.accuracy != null}"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/txt_label_speed"
             tools:text="Accuracy: 5" />
@@ -159,8 +159,8 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
             android:layout_marginTop="10dp"
-            android:text="@{@string/evasion(viewmodel.stats.evasion.effort)}"
-            app:isVisible="@{viewmodel.stats.evasion != null}"
+            android:text="@{@string/evasion(state.stats.evasion.effort)}"
+            app:isVisible="@{state.stats.evasion != null}"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/txt_label_accuracy"
             tools:text="Evasion: 5" />
