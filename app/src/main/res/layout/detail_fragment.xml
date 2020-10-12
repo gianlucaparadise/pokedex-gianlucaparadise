@@ -26,155 +26,144 @@
             app:layout_constraintTop_toTopOf="parent"
             tools:visibility="visible" />
 
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline_almost_center_vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.4" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/txt_pokemon_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@{state.name}"
+            android:textAlignment="center"
+            android:textAppearance="?attr/textAppearanceHeadline4"
+            android:transitionName="pokemonName"
+            app:layout_constraintBottom_toBottomOf="@+id/guideline_almost_center_vertical"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/guideline_almost_center_vertical"
+            tools:text="Ditto" />
+
         <ImageView
             android:id="@+id/img_pokemon"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="20dp"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginBottom="5dp"
+            android:scaleType="fitCenter"
             app:imageFromUrl="@{state.imageUrl}"
+            app:layout_constraintBottom_toTopOf="@+id/list_pokemon_type"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:src="@mipmap/ic_launcher" />
-
-        <TextView
-            android:id="@+id/txt_pokemon_name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:text="@{state.name}"
-            android:transitionName="pokemonName"
-            app:layout_constraintBottom_toTopOf="@+id/txt_label_type"
-            app:layout_constraintStart_toEndOf="@+id/img_pokemon"
-            app:layout_constraintTop_toTopOf="@+id/img_pokemon"
-            app:layout_constraintVertical_chainStyle="packed"
-            tools:text="Ditto" />
-
-        <TextView
-            android:id="@+id/txt_label_type"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:text="@string/type_label"
-            app:isVisible="@{state.types != null}"
-            app:layout_constraintBottom_toBottomOf="@+id/img_pokemon"
-            app:layout_constraintStart_toStartOf="@+id/txt_pokemon_name"
-            app:layout_constraintTop_toBottomOf="@+id/txt_pokemon_name" />
 
         <com.gianlucaparadise.pokedex.view.TypesListView
             android:id="@+id/list_pokemon_type"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            app:layout_constraintBottom_toBottomOf="@+id/txt_label_type"
-            app:layout_constraintStart_toEndOf="@+id/txt_label_type"
-            app:layout_constraintTop_toTopOf="@+id/txt_label_type"
+            android:layout_marginBottom="5dp"
+            app:layout_constraintBottom_toTopOf="@+id/txt_pokemon_name"
+            app:layout_constraintEnd_toEndOf="@+id/txt_pokemon_name"
+            app:layout_constraintStart_toStartOf="@+id/txt_pokemon_name"
             app:types="@{state.types}" />
 
-        <androidx.constraintlayout.widget.Barrier
-            android:id="@+id/barrier_header"
+        <com.google.android.flexbox.FlexboxLayout
+            android:id="@+id/list_pokemon_stats"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:barrierDirection="bottom"
-            app:constraint_referenced_ids="img_pokemon,txt_label_type,list_pokemon_type"
-            app:layout_constraintBottom_toBottomOf="@+id/img_pokemon"
-            app:layout_constraintStart_toStartOf="@+id/img_pokemon" />
-
-        <TextView
-            android:id="@+id/txt_label_hp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="20dp"
-            android:text="@{@string/hp(state.stats.hp.effort)}"
-            app:isVisible="@{state.stats.hp != null}"
+            android:layout_margin="10dp"
+            app:flexDirection="row"
+            app:flexWrap="wrap"
+            app:justifyContent="space_evenly"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/barrier_header"
-            tools:text="HP: 5" />
+            app:layout_constraintTop_toBottomOf="@+id/txt_pokemon_name">
 
-        <TextView
-            android:id="@+id/txt_label_attack"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="10dp"
-            android:text="@{@string/attack(state.stats.attack.effort)}"
-            app:isVisible="@{state.stats.attack != null}"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/txt_label_hp"
-            tools:text="Attack: 5" />
+            <com.gianlucaparadise.pokedex.view.StatView
+                android:id="@+id/txt_label_hp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                app:isVisible="@{state.stats.hp != null}"
+                app:statName="@string/hp"
+                app:statValue="@{state.stats.hp.effort}"
+                tools:statValue="2" />
 
-        <TextView
-            android:id="@+id/txt_label_defense"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="10dp"
-            android:text="@{@string/defense(state.stats.defense.effort)}"
-            app:isVisible="@{state.stats.defense != null}"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/txt_label_attack"
-            tools:text="Defense: 5" />
+            <com.gianlucaparadise.pokedex.view.StatView
+                android:id="@+id/txt_label_attack"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:layout_marginStart="20dp"
+                app:isVisible="@{state.stats.attack != null}"
+                app:statName="@string/attack"
+                app:statValue="@{state.stats.attack.effort}"
+                tools:statValue="2" />
 
-        <TextView
-            android:id="@+id/txt_label_special_attack"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="10dp"
-            android:text="@{@string/special_attack(state.stats.specialAttack.effort)}"
-            app:isVisible="@{state.stats.specialAttack != null}"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/txt_label_defense"
-            tools:text="Special-Attack: 5" />
+            <com.gianlucaparadise.pokedex.view.StatView
+                android:id="@+id/txt_label_defense"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                app:isVisible="@{state.stats.defense != null}"
+                app:statName="@string/defense"
+                app:statValue="@{state.stats.defense.effort}"
+                tools:statValue="2" />
 
-        <TextView
-            android:id="@+id/txt_label_special_defense"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="10dp"
-            android:text="@{@string/special_defense(state.stats.specialDefense.effort)}"
-            app:isVisible="@{state.stats.specialDefense != null}"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/txt_label_special_attack"
-            tools:text="Special-Defense: 5" />
+            <com.gianlucaparadise.pokedex.view.StatView
+                android:id="@+id/txt_label_special_attack"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                app:isVisible="@{state.stats.specialAttack != null}"
+                app:statName="@string/special_attack"
+                app:statValue="@{state.stats.specialAttack.effort}"
+                tools:statValue="2" />
 
-        <TextView
-            android:id="@+id/txt_label_speed"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="10dp"
-            android:text="@{@string/speed(state.stats.speed.effort)}"
-            app:isVisible="@{state.stats.speed != null}"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/txt_label_special_defense"
-            tools:text="Speed: 5" />
+            <com.gianlucaparadise.pokedex.view.StatView
+                android:id="@+id/txt_label_special_defense"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                app:isVisible="@{state.stats.specialDefense != null}"
+                app:statName="@string/special_defense"
+                app:statValue="@{state.stats.specialDefense.effort}"
+                tools:statValue="2" />
 
-        <TextView
-            android:id="@+id/txt_label_accuracy"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="10dp"
-            android:text="@{@string/accuracy(state.stats.accuracy.effort)}"
-            app:isVisible="@{state.stats.accuracy != null}"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/txt_label_speed"
-            tools:text="Accuracy: 5" />
+            <com.gianlucaparadise.pokedex.view.StatView
+                android:id="@+id/txt_label_speed"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                app:isVisible="@{state.stats.speed != null}"
+                app:statName="@string/speed"
+                app:statValue="@{state.stats.speed.effort}"
+                tools:statValue="2" />
 
-        <TextView
-            android:id="@+id/txt_label_evasion"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="10dp"
-            android:text="@{@string/evasion(state.stats.evasion.effort)}"
-            app:isVisible="@{state.stats.evasion != null}"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/txt_label_accuracy"
-            tools:text="Evasion: 5" />
+            <com.gianlucaparadise.pokedex.view.StatView
+                android:id="@+id/txt_label_accuracy"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                app:isVisible="@{state.stats.accuracy != null}"
+                app:statName="@string/accuracy"
+                app:statValue="@{state.stats.accuracy.effort}"
+                tools:statValue="2" />
+
+            <com.gianlucaparadise.pokedex.view.StatView
+                android:id="@+id/txt_label_evasion"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                app:isVisible="@{state.stats.evasion != null}"
+                app:statName="@string/evasion"
+                app:statValue="@{state.stats.evasion.effort}"
+                tools:statValue="2" />
+
+        </com.google.android.flexbox.FlexboxLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

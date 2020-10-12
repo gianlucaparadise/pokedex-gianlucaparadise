@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="StatView">
+        <attr name="statName" format="string"/>
+        <attr name="statValue" format="integer" />
+    </declare-styleable>
+</resources>
