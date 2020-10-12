@@ -1,5 +1,7 @@
 package com.gianlucaparadise.pokedex.ui.detail
 
+import android.animation.AnimatorSet
+import android.animation.ObjectAnimator
 import android.os.Bundle
 import android.transition.TransitionInflater
 import androidx.fragment.app.Fragment
@@ -57,17 +59,58 @@ class DetailFragment : Fragment() {
 
         onEvents(viewModel) { event ->
             when (val data = event.take()) {
-                is DetailEvent.Loading -> progress_circular.isVisible = true
-                is DetailEvent.NotLoading -> progress_circular.isVisible = false
+                is DetailEvent.Loading -> {
+                    progress_circular.isVisible = true
+                }
+                is DetailEvent.NotLoading -> {
+                    progress_circular.isVisible = false
+                    animateShowDetails()
+                }
             }
         }
 
+        hideDetails()
         viewModel.getPokemonDetail()
     }
 
     private fun updateState(state: DetailState) {
         activity?.title = state.name
         binding.state = state
+    }
+
+    private fun hideDetails() {
+        val createAlphaAnimation = fun(v: View): ObjectAnimator {
+            return ObjectAnimator.ofFloat(v, "alpha", 1f, 0f)
+        }
+
+        val animatorSet = AnimatorSet().apply {
+            playTogether(
+                createAlphaAnimation(img_pokemon),
+                createAlphaAnimation(list_pokemon_type),
+                createAlphaAnimation(list_pokemon_stats),
+            )
+            duration = 0
+        }
+
+        animatorSet.start()
+    }
+
+    private fun animateShowDetails() {
+        val createAlphaAnimation = fun(v: View): ObjectAnimator {
+            return ObjectAnimator.ofFloat(v, "alpha", 0f, 1f)
+        }
+
+        val animatorSet = AnimatorSet().apply {
+            playTogether(
+                createAlphaAnimation(img_pokemon),
+                createAlphaAnimation(list_pokemon_type),
+                createAlphaAnimation(list_pokemon_stats)
+            )
+            duration = 500
+            startDelay = 500
+        }
+
+        animatorSet.start()
     }
 
     private fun showError() {

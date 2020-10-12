@@ -21,6 +21,7 @@
         android:layout_marginVertical="4dp"
         android:elevation="5dp"
         android:onClick="@{clickListener}"
+        app:cardBackgroundColor="@color/colorAccentLight"
         app:cardCornerRadius="50dp">
 
         <com.google.android.material.textview.MaterialTextView
@@ -29,9 +30,9 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:padding="20dp"
-            android:textAppearance="?attr/textAppearanceListItem"
             android:text="@{name}"
             android:textAlignment="center"
+            android:textAppearance="?attr/textAppearanceListItem"
             tools:text="Bulbasaur" />
 
     </com.google.android.material.card.MaterialCardView>
