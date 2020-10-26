@@ -6,10 +6,12 @@ import com.gianlucaparadise.pokedex.vo.Type
 import com.squareup.moshi.JsonAdapter
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.Types
+import org.koin.core.KoinComponent
+import org.koin.core.inject
 
-class DatabaseTypeConverters {
+class DatabaseTypeConverters : KoinComponent {
 
-    private val moshi = Moshi.Builder().build()
+    private val moshi: Moshi by inject()
 
     // I'm using Type Converters for Lists in order to avoid Foreign keys and multiple tables
 
