@@ -3,8 +3,9 @@ package com.gianlucaparadise.pokedex.paging
 import android.util.Log
 import androidx.paging.PagedList
 import com.gianlucaparadise.pokedex.database.AppDatabase
+import com.gianlucaparadise.pokedex.mapper.toPokemonListItemList
 import com.gianlucaparadise.pokedex.network.PokeApiService
-import com.gianlucaparadise.pokedex.vo.PokemonListItem
+import com.gianlucaparadise.pokedex.vo.main.PokemonListItem
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.asCoroutineDispatcher
@@ -54,7 +55,8 @@ class PokemonListBoundaryCallback(
                                 "first: ${response.results?.firstOrNull()} "
                     )
 
-                    val pokemonListItems = response.results
+                    val pokemonListItemsWeb = response.results
+                    val pokemonListItems = pokemonListItemsWeb?.toPokemonListItemList()
                     if (pokemonListItems != null) {
                         db.pokemonListItemDao().insert(pokemonListItems)
                     }
@@ -79,7 +81,7 @@ class PokemonListBoundaryCallback(
 
                     Log.d(
                         tag, "Loading after, start - " +
-                                "page: ${itemAtEnd.name}, ${itemAtEnd.url} " +
+                                "page: ${itemAtEnd.name} " +
                                 "pagesize: ${pageConfig.pageSize} "
                     )
 
@@ -94,7 +96,8 @@ class PokemonListBoundaryCallback(
                                 "first: ${response.results?.firstOrNull()} "
                     )
 
-                    val pokemonListItems = response.results
+                    val pokemonListItemsWeb = response.results
+                    val pokemonListItems = pokemonListItemsWeb?.toPokemonListItemList()
                     if (pokemonListItems != null) {
                         db.pokemonListItemDao().insert(pokemonListItems)
                     }

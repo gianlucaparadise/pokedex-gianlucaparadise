@@ -1,14 +1,13 @@
 package com.gianlucaparadise.pokedex.di
 
 import android.content.Context
-import android.util.Log
 import androidx.room.Room
 import com.gianlucaparadise.pokedex.database.AppDatabase
 import com.gianlucaparadise.pokedex.repository.PokedexRepository
 import com.gianlucaparadise.pokedex.repository.PokedexRepositoryImpl
 import com.gianlucaparadise.pokedex.ui.detail.DetailViewModel
 import com.gianlucaparadise.pokedex.ui.main.MainViewModel
-import com.gianlucaparadise.pokedex.vo.PokemonListItem
+import com.gianlucaparadise.pokedex.vo.main.PokemonListItem
 import com.squareup.moshi.Moshi
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.viewmodel.dsl.viewModel

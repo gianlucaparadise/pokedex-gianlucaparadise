@@ -6,8 +6,6 @@ import android.view.LayoutInflater
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.databinding.BindingAdapter
 import com.gianlucaparadise.pokedex.R
-import com.gianlucaparadise.pokedex.vo.NameUrlPair
-import com.gianlucaparadise.pokedex.vo.Type
 import com.google.android.material.chip.Chip
 import com.google.android.material.chip.ChipGroup
 
@@ -17,8 +15,8 @@ class TypesListView @JvmOverloads constructor(
     defStyle: Int = 0
 ) : ChipGroup(context, attrs, defStyle) {
 
-    private var _types: List<Type>? = null
-    var types: List<Type>?
+    private var _types: List<String>? = null
+    var types: List<String>?
         get() = _types
         set(value) {
             if (_types == value) return
@@ -32,14 +30,14 @@ class TypesListView @JvmOverloads constructor(
         //region Code for Android Studio Layout Editor
         if (isInEditMode) {
             this.types = listOf(
-                Type(0, NameUrlPair("grass", "")),
-                Type(1, NameUrlPair("poison", ""))
+                "grass",
+                "poison"
             )
         }
         //endregion
     }
 
-    private fun updateTypeChips(types: List<Type>?) {
+    private fun updateTypeChips(types: List<String>?) {
         this.removeAllViews()
         if (types?.any() != true) return
 
@@ -54,13 +52,13 @@ class TypesListView @JvmOverloads constructor(
         }
     }
 
-    private fun createChipFromType(type: Type): Chip {
+    private fun createChipFromType(type: String): Chip {
         val chip = LayoutInflater.from(context)
             .inflate(R.layout.type_list_view_item, this, false) as Chip
 
-        chip.text = type.type.name
+        chip.text = type
 
-        val color = when (type.type.name) {
+        val color = when (type) {
             "normal" -> R.color.type_normal
             "fighting" -> R.color.type_fighting
             "flying" -> R.color.type_flying
@@ -90,6 +88,6 @@ class TypesListView @JvmOverloads constructor(
 }
 
 @BindingAdapter("types")
-fun bindTypes(view: TypesListView, types: List<Type>?) {
+fun bindTypes(view: TypesListView, types: List<String>?) {
     view.types = types
 }

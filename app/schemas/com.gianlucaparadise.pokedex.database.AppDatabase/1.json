@@ -2,28 +2,28 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "48a864eaeb3ab1a095485c25f5d3c863",
+    "identityHash": "00b61ae1d068304d4ba654205a7c848a",
     "entities": [
       {
         "tableName": "PokemonListItem",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`name` TEXT NOT NULL, `url` TEXT NOT NULL, PRIMARY KEY(`name`))",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER NOT NULL, `name` TEXT NOT NULL, PRIMARY KEY(`id`))",
         "fields": [
           {
-            "fieldPath": "name",
-            "columnName": "name",
-            "affinity": "TEXT",
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "INTEGER",
             "notNull": true
           },
           {
-            "fieldPath": "url",
-            "columnName": "url",
+            "fieldPath": "name",
+            "columnName": "name",
             "affinity": "TEXT",
             "notNull": true
           }
         ],
         "primaryKey": {
           "columnNames": [
-            "name"
+            "id"
           ],
           "autoGenerate": false
         },
@@ -32,7 +32,7 @@
       },
       {
         "tableName": "Pokemon",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER NOT NULL, `name` TEXT NOT NULL, `base_experience` INTEGER, `height` INTEGER, `is_default` INTEGER, `order` INTEGER, `weight` INTEGER, `location_area_encounters` TEXT, `stats` TEXT, `types` TEXT, `spritesback_female` TEXT, `spritesback_shiny_female` TEXT, `spritesback_default` TEXT, `spritesfront_female` TEXT, `spritesfront_shiny_female` TEXT, `spritesback_shiny` TEXT, `spritesfront_default` TEXT, `spritesfront_shiny` TEXT, PRIMARY KEY(`id`))",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER NOT NULL, `name` TEXT NOT NULL, `stats` TEXT, `types` TEXT, `spritesfrontDefault` TEXT, PRIMARY KEY(`id`))",
         "fields": [
           {
             "fieldPath": "id",
@@ -47,42 +47,6 @@
             "notNull": true
           },
           {
-            "fieldPath": "base_experience",
-            "columnName": "base_experience",
-            "affinity": "INTEGER",
-            "notNull": false
-          },
-          {
-            "fieldPath": "height",
-            "columnName": "height",
-            "affinity": "INTEGER",
-            "notNull": false
-          },
-          {
-            "fieldPath": "is_default",
-            "columnName": "is_default",
-            "affinity": "INTEGER",
-            "notNull": false
-          },
-          {
-            "fieldPath": "order",
-            "columnName": "order",
-            "affinity": "INTEGER",
-            "notNull": false
-          },
-          {
-            "fieldPath": "weight",
-            "columnName": "weight",
-            "affinity": "INTEGER",
-            "notNull": false
-          },
-          {
-            "fieldPath": "location_area_encounters",
-            "columnName": "location_area_encounters",
-            "affinity": "TEXT",
-            "notNull": false
-          },
-          {
             "fieldPath": "stats",
             "columnName": "stats",
             "affinity": "TEXT",
@@ -95,50 +59,8 @@
             "notNull": false
           },
           {
-            "fieldPath": "sprites.back_female",
-            "columnName": "spritesback_female",
-            "affinity": "TEXT",
-            "notNull": false
-          },
-          {
-            "fieldPath": "sprites.back_shiny_female",
-            "columnName": "spritesback_shiny_female",
-            "affinity": "TEXT",
-            "notNull": false
-          },
-          {
-            "fieldPath": "sprites.back_default",
-            "columnName": "spritesback_default",
-            "affinity": "TEXT",
-            "notNull": false
-          },
-          {
-            "fieldPath": "sprites.front_female",
-            "columnName": "spritesfront_female",
-            "affinity": "TEXT",
-            "notNull": false
-          },
-          {
-            "fieldPath": "sprites.front_shiny_female",
-            "columnName": "spritesfront_shiny_female",
-            "affinity": "TEXT",
-            "notNull": false
-          },
-          {
-            "fieldPath": "sprites.back_shiny",
-            "columnName": "spritesback_shiny",
-            "affinity": "TEXT",
-            "notNull": false
-          },
-          {
-            "fieldPath": "sprites.front_default",
-            "columnName": "spritesfront_default",
-            "affinity": "TEXT",
-            "notNull": false
-          },
-          {
-            "fieldPath": "sprites.front_shiny",
-            "columnName": "spritesfront_shiny",
+            "fieldPath": "sprites.frontDefault",
+            "columnName": "spritesfrontDefault",
             "affinity": "TEXT",
             "notNull": false
           }
@@ -156,7 +78,7 @@
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '48a864eaeb3ab1a095485c25f5d3c863')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '00b61ae1d068304d4ba654205a7c848a')"
     ]
   }
 }

@@ -4,7 +4,7 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
-import com.gianlucaparadise.pokedex.vo.Pokemon
+import com.gianlucaparadise.pokedex.vo.main.Pokemon
 
 @Dao
 interface PokemonDetailDao {

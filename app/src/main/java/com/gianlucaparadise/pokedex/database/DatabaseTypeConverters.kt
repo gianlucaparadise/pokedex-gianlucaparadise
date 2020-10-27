@@ -1,8 +1,7 @@
 package com.gianlucaparadise.pokedex.database
 
 import androidx.room.TypeConverter
-import com.gianlucaparadise.pokedex.vo.Stats
-import com.gianlucaparadise.pokedex.vo.Type
+import com.gianlucaparadise.pokedex.vo.main.StatsDescriptor
 import com.squareup.moshi.JsonAdapter
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.Types
@@ -15,33 +14,32 @@ class DatabaseTypeConverters : KoinComponent {
 
     // I'm using Type Converters for Lists in order to avoid Foreign keys and multiple tables
 
-    //region List Of Stats
-    private val listOfStats = Types.newParameterizedType(List::class.java, Stats::class.java)
-    private val jsonAdapterListOfStats: JsonAdapter<List<Stats>> = moshi.adapter(listOfStats)
+    //region List Of Strings
+    private val listOfStrings = Types.newParameterizedType(List::class.java, String::class.java)
+    private val jsonAdapterListOfStrings: JsonAdapter<List<String>> = moshi.adapter(listOfStrings)
 
     @TypeConverter
-    fun listOfStatsToJson(listOfStats: List<Stats>?): String? {
-        return jsonAdapterListOfStats.toJson(listOfStats)
+    fun listOfStringsToJson(listOfStrings: List<String>?): String? {
+        return jsonAdapterListOfStrings.toJson(listOfStrings)
     }
 
     @TypeConverter
-    fun jsonToListOfStats(json: String?): List<Stats>? {
-        return json?.let { jsonAdapterListOfStats.fromJson(json) }
+    fun jsonToListOfStrings(json: String?): List<String>? {
+        return json?.let { jsonAdapterListOfStrings.fromJson(json) }
     }
     //endregion
 
-    //region List Of Type
-    private val listOfTypes = Types.newParameterizedType(List::class.java, Type::class.java)
-    private val jsonAdapterListOfTypes: JsonAdapter<List<Type>> = moshi.adapter(listOfTypes)
+    //region StatsDescriptor
+    private val jsonAdapterStatsDescriptor: JsonAdapter<StatsDescriptor> = moshi.adapter(StatsDescriptor::class.java)
 
     @TypeConverter
-    fun listOfTypeToJson(listOfTypes: List<Type>?): String? {
-        return jsonAdapterListOfTypes.toJson(listOfTypes)
+    fun statsDescriptorToJson(statsDescriptor: StatsDescriptor?): String? {
+        return jsonAdapterStatsDescriptor.toJson(statsDescriptor)
     }
 
     @TypeConverter
-    fun jsonToListOfTypes(json: String?): List<Type>? {
-        return json?.let { jsonAdapterListOfTypes.fromJson(json) }
+    fun jsonToStatsDescriptor(json: String?): StatsDescriptor? {
+        return json?.let { jsonAdapterStatsDescriptor.fromJson(json) }
     }
     //endregion
 }

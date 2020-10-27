@@ -7,7 +7,7 @@ import androidx.paging.PagedListAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.gianlucaparadise.pokedex.databinding.PokemonListItemBinding
-import com.gianlucaparadise.pokedex.vo.PokemonListItem
+import com.gianlucaparadise.pokedex.vo.main.PokemonListItem
 
 typealias PokemonClickHandler = (PokemonListItem, PokemonListAdapter.ViewHolder) -> Unit
 

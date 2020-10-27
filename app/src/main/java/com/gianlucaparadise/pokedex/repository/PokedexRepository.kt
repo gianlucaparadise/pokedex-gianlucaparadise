@@ -3,10 +3,11 @@ package com.gianlucaparadise.pokedex.repository
 import androidx.paging.LivePagedListBuilder
 import androidx.paging.PagedList
 import com.gianlucaparadise.pokedex.database.AppDatabase
+import com.gianlucaparadise.pokedex.mapper.toPokemon
 import com.gianlucaparadise.pokedex.network.PokeApiService
 import com.gianlucaparadise.pokedex.paging.PokemonListBoundaryCallback
-import com.gianlucaparadise.pokedex.vo.Pokemon
-import com.gianlucaparadise.pokedex.vo.PokemonListItem
+import com.gianlucaparadise.pokedex.vo.main.Pokemon
+import com.gianlucaparadise.pokedex.vo.main.PokemonListItem
 import kotlinx.coroutines.CoroutineScope
 
 interface PokedexRepository {
@@ -49,8 +50,9 @@ class PokedexRepositoryImpl(
         if (dbPokemon != null) return dbPokemon
 
         val webPokemon = backend.getPokemon(name)
-        database.pokemonDetailDao().insert(webPokemon)
+        val pokemon = webPokemon.toPokemon()
+        database.pokemonDetailDao().insert(pokemon)
 
-        return webPokemon
+        return pokemon
     }
 }

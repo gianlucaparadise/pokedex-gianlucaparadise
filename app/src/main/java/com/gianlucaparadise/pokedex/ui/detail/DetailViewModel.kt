@@ -2,11 +2,9 @@ package com.gianlucaparadise.pokedex.ui.detail
 
 import android.util.Log
 import com.gianlucaparadise.pokedex.repository.PokedexRepository
-import com.gianlucaparadise.pokedex.vo.Pokemon
-import com.gianlucaparadise.pokedex.vo.PokemonListItem
+import com.gianlucaparadise.pokedex.vo.main.PokemonListItem
 import io.uniflow.androidx.flow.AndroidDataFlow
 import io.uniflow.core.flow.data.UIState
-import kotlinx.coroutines.*
 
 class DetailViewModel(
     private val pokemonListItem: PokemonListItem,
@@ -31,17 +29,4 @@ class DetailViewModel(
             sendEvent(DetailEvent.NotLoading)
         }
     )
-
-    /**
-     * This function waits a while before returning the pokemon
-     */
-    private suspend fun getPokemonCalmly(pokemonName: String): Pokemon {
-        return withContext(Dispatchers.IO) {
-            val minimumTime = async { delay(500) }
-            val getPokemon = async { repository.getPokemon(pokemonName) }
-
-            minimumTime.await()
-            getPokemon.await()
-        }
-    }
 }

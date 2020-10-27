@@ -19,7 +19,7 @@
 
             <argument
                 android:name="pokemonListItem"
-                app:argType="com.gianlucaparadise.pokedex.vo.PokemonListItem" />
+                app:argType="com.gianlucaparadise.pokedex.vo.main.PokemonListItem" />
 
         </action>
     </fragment>
@@ -30,7 +30,7 @@
 
         <argument
             android:name="pokemonListItem"
-            app:argType="com.gianlucaparadise.pokedex.vo.PokemonListItem" />
+            app:argType="com.gianlucaparadise.pokedex.vo.main.PokemonListItem" />
 
     </fragment>
 </navigation>

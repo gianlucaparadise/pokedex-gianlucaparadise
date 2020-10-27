@@ -1,8 +1,10 @@
-package com.gianlucaparadise.pokedex.vo
+package com.gianlucaparadise.pokedex.mapper
 
-fun createStatsDescriptorFromRawStats(rawStats: List<Stats>?): StatsDescriptor? {
-    if (rawStats == null) return null
+import com.gianlucaparadise.pokedex.vo.main.StatsDescriptor
+import com.gianlucaparadise.pokedex.vo.network.StatsWeb
+import java.util.*
 
+fun List<StatsWeb>.toStatsDescriptor(): StatsDescriptor {
     var hp: StatsDescriptor.Stat? = null
     var attack: StatsDescriptor.Stat? = null
     var defense: StatsDescriptor.Stat? = null
@@ -12,9 +14,9 @@ fun createStatsDescriptorFromRawStats(rawStats: List<Stats>?): StatsDescriptor? 
     var accuracy: StatsDescriptor.Stat? = null
     var evasion: StatsDescriptor.Stat? = null
 
-    for (rawStat in rawStats) {
+    for (rawStat in this) {
         val tempStat = StatsDescriptor.Stat(rawStat.base_stat, rawStat.effort)
-        when (rawStat.stat.name.toLowerCase()) {
+        when (rawStat.stat.name.toLowerCase(Locale.getDefault())) {
             "hp" -> hp = tempStat
             "attack" -> attack = tempStat
             "defense" -> defense = tempStat
@@ -32,20 +34,4 @@ fun createStatsDescriptorFromRawStats(rawStats: List<Stats>?): StatsDescriptor? 
     return StatsDescriptor(
         hp, attack, defense, specialAttack, specialDefense, speed, accuracy, evasion
     )
-}
-
-/**
- * This class helps parsing the raw backend Stats data
- */
-data class StatsDescriptor(
-    val hp: Stat?,
-    val attack: Stat?,
-    val defense: Stat?,
-    val specialAttack: Stat?,
-    val specialDefense: Stat?,
-    val speed: Stat?,
-    val accuracy: Stat?,
-    val evasion: Stat?
-) {
-    data class Stat(val base: Int, val effort: Int)
 }

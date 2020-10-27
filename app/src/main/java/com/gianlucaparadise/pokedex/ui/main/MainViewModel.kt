@@ -1,11 +1,8 @@
 package com.gianlucaparadise.pokedex.ui.main
 
-import android.util.Log
 import androidx.lifecycle.*
 import com.gianlucaparadise.pokedex.repository.PokedexRepository
-import com.gianlucaparadise.pokedex.vo.PokemonListItem
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
 
 class MainViewModel(repository: PokedexRepository) : ViewModel() {
 
