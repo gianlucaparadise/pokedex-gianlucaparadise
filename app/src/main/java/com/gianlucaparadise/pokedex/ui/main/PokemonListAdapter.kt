@@ -1,18 +1,20 @@
-package com.gianlucaparadise.pokedex.adapters
+package com.gianlucaparadise.pokedex.ui.main
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.paging.PagedListAdapter
+import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.gianlucaparadise.pokedex.databinding.PokemonListItemBinding
 import com.gianlucaparadise.pokedex.vo.main.PokemonListItem
+import java.util.*
 
 typealias PokemonClickHandler = (PokemonListItem, PokemonListAdapter.ViewHolder) -> Unit
 
 class PokemonListAdapter(private val onPokemonClicked: PokemonClickHandler?) :
-    PagedListAdapter<PokemonListItem, PokemonListAdapter.ViewHolder>(PokemonDiffCallback()) {
+    PagingDataAdapter<PokemonListItem, PokemonListAdapter.ViewHolder>(PokemonDiffCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(
@@ -23,6 +25,15 @@ class PokemonListAdapter(private val onPokemonClicked: PokemonClickHandler?) :
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         getItem(position)?.let { item ->
             holder.bind(item, createOnClickListener(item, holder))
+        }
+    }
+
+    override fun onBindViewHolder(holder: ViewHolder, position: Int, payloads: MutableList<Any>) {
+        if (payloads.isNotEmpty()) {
+            Log.d("PokemonListAdapter", "onBindViewHolder: Payload is empty")
+        }
+        else {
+            onBindViewHolder(holder, position)
         }
     }
 
@@ -40,7 +51,7 @@ class PokemonListAdapter(private val onPokemonClicked: PokemonClickHandler?) :
     ) : RecyclerView.ViewHolder(binding.root) {
         fun bind(pokemon: PokemonListItem, listener: View.OnClickListener) {
             with(binding) {
-                name = pokemon.name.capitalize()
+                name = pokemon.name.capitalize(Locale.getDefault())
                 clickListener = listener
             }
         }

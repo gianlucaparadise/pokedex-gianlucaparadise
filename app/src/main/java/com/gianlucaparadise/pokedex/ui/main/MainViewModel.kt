@@ -2,12 +2,11 @@ package com.gianlucaparadise.pokedex.ui.main
 
 import androidx.lifecycle.*
 import com.gianlucaparadise.pokedex.repository.PokedexRepository
-import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.FlowPreview
 
 class MainViewModel(repository: PokedexRepository) : ViewModel() {
 
-    private val pokemonListResult = repository.getPokemonList(viewModelScope)
-
-    val pokemonList = pokemonListResult.pagedList
-    val networkState = pokemonListResult.networkState.asLiveData(Dispatchers.IO)
+    @OptIn(ExperimentalCoroutinesApi::class, FlowPreview::class)
+    val pokemonList = repository.getPokemonList()
 }

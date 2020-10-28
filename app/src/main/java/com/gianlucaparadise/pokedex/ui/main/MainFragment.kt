@@ -5,16 +5,17 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.lifecycle.Observer
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.navigation.fragment.findNavController
+import androidx.paging.LoadState
 import com.gianlucaparadise.pokedex.R
-import com.gianlucaparadise.pokedex.adapters.PokemonClickHandler
-import com.gianlucaparadise.pokedex.adapters.PokemonListAdapter
 import com.gianlucaparadise.pokedex.databinding.MainFragmentBinding
-import com.gianlucaparadise.pokedex.repository.Status
-import com.google.android.material.snackbar.Snackbar
+import kotlinx.android.synthetic.main.main_fragment.*
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.launch
 import org.koin.android.viewmodel.ext.android.viewModel
+import kotlinx.coroutines.flow.collectLatest
 
 class MainFragment : Fragment() {
 
@@ -25,16 +26,24 @@ class MainFragment : Fragment() {
     private val viewModel: MainViewModel by viewModel()
     private lateinit var binding: MainFragmentBinding
 
+    private val adapter
+        get() = binding.pokemonList.adapter as? PokemonListAdapter
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         binding = MainFragmentBinding.inflate(inflater, container, false)
 
-        val adapter = PokemonListAdapter(onPokemonClicked)
-        binding.pokemonList.adapter = adapter
+        binding.pokemonList.adapter = PokemonListAdapter(onPokemonClicked)
 
         return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        swipe_refresh.setOnRefreshListener { this.adapter?.refresh() }
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
@@ -42,23 +51,18 @@ class MainFragment : Fragment() {
 
         activity?.title = getString(R.string.app_name)
 
-        viewModel.pokemonList.observe(viewLifecycleOwner, Observer { result ->
-            val adapter = binding.pokemonList.adapter
-            if (adapter is PokemonListAdapter) {
-                adapter.submitList(result)
+        lifecycleScope.launch {
+            adapter?.loadStateFlow?.collectLatest { loadStates ->
+                swipe_refresh.isRefreshing = loadStates.refresh is LoadState.Loading
             }
-        })
+        }
 
-        viewModel.networkState.observe(viewLifecycleOwner, Observer { state ->
-            if (state.status == Status.FAILED) {
-                Snackbar
-                    .make(requireView(), R.string.pokemon_list_network_error, Snackbar.LENGTH_INDEFINITE)
-                    .setAction(R.string.ok) {
-                        // no-op
-                    }
-                    .show()
+        lifecycleScope.launch {
+            @OptIn(ExperimentalCoroutinesApi::class)
+            viewModel.pokemonList.collectLatest {
+                adapter?.submitData(it)
             }
-        })
+        }
     }
 
     private val onPokemonClicked: PokemonClickHandler = { pokemonListItem, holder ->

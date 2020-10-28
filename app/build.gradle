@@ -29,6 +29,7 @@ android {
     }
     kotlinOptions {
         jvmTarget = JavaVersion.VERSION_1_8.toString()
+        freeCompilerArgs += "-Xopt-in=kotlin.RequiresOptIn"
     }
     buildFeatures {
         dataBinding true
@@ -73,7 +74,7 @@ dependencies {
     kapt "com.squareup.moshi:moshi-kotlin-codegen:$versions.moshi"
 
     // Paging
-    implementation "androidx.paging:paging-runtime-ktx:$versions.paging"
+    implementation "androidx.paging:paging-runtime:$versions.paging"
 
     // Room
     implementation "androidx.room:room-runtime:$versions.room"
