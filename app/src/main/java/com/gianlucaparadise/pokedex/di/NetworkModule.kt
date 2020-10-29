@@ -1,5 +1,6 @@
 package com.gianlucaparadise.pokedex.di
 
+import com.gianlucaparadise.pokedex.BuildConfig
 import com.gianlucaparadise.pokedex.network.PokeApiService
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -18,7 +19,7 @@ fun provideRetrofit(): Retrofit {
     val client = OkHttpClient.Builder().addInterceptor(interceptor).build()
 
     return Retrofit.Builder()
-        .baseUrl("https://pokeapi.co/api/v2/")
+        .baseUrl(BuildConfig.ENDPOINT_POKEAPI)
         .client(client)
         .addConverterFactory(MoshiConverterFactory.create())
         .build()

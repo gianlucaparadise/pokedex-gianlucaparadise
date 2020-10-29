@@ -36,7 +36,13 @@ android {
     }
 
     buildTypes {
+        debug {
+            // a different url can be used for developing (e.g. a mock server)
+            buildConfigField "String", "ENDPOINT_POKEAPI", "\"https://pokeapi.co/api/v2/\""
+        }
         release {
+            buildConfigField "String", "ENDPOINT_POKEAPI", "\"https://pokeapi.co/api/v2/\""
+
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
