@@ -1,7 +1,6 @@
 package com.gianlucaparadise.pokedex.view
 
 import android.content.Context
-import android.content.res.ColorStateList
 import android.util.AttributeSet
 import android.util.TypedValue
 import androidx.core.content.res.getIntegerOrThrow

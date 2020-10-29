@@ -12,7 +12,3 @@ fun PokemonWeb.toPokemon() : Pokemon {
         types = this.types?.toTypeList()
     )
 }
-
-fun List<PokemonWeb>.toPokemonList(): List<Pokemon> {
-    return this.map { p -> p.toPokemon() }
-}

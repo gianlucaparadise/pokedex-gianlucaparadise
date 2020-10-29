@@ -7,7 +7,6 @@ import org.koin.dsl.module
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 
-
 val networkModule = module {
     factory { providePokeApiService(get()) }
     single { provideRetrofit() }

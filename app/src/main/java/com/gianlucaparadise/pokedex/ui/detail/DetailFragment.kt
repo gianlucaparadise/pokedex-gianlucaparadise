@@ -22,10 +22,6 @@ import org.koin.core.parameter.parametersOf
 
 class DetailFragment : Fragment() {
 
-    companion object {
-        fun newInstance() = DetailFragment()
-    }
-
     private val args: DetailFragmentArgs by navArgs()
     private val viewModel: DetailViewModel by viewModel { parametersOf(args.pokemonListItem) }
     private lateinit var binding: DetailFragmentBinding

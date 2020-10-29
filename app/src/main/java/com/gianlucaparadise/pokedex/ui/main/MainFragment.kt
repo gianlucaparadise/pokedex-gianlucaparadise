@@ -19,10 +19,6 @@ import kotlinx.coroutines.flow.collectLatest
 
 class MainFragment : Fragment() {
 
-    companion object {
-        fun newInstance() = MainFragment()
-    }
-
     private val viewModel: MainViewModel by viewModel()
     private lateinit var binding: MainFragmentBinding
 
