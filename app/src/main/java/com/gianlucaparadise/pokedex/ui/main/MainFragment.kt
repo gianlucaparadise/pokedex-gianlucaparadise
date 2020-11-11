@@ -31,7 +31,12 @@ class MainFragment : Fragment() {
     ): View {
         binding = MainFragmentBinding.inflate(inflater, container, false)
 
-        binding.pokemonList.adapter = PokemonListAdapter(onPokemonClicked)
+        binding.pokemonList.adapter = PokemonListAdapter(onPokemonClicked).apply {
+            withLoadStateHeaderAndFooter(
+                header = PokemonListLoadStateAdapter { adapter?.retry() },
+                footer = PokemonListLoadStateAdapter { adapter?.retry() }
+            )
+        }
 
         return binding.root
     }
